@@ -1,0 +1,9 @@
+# Packages
+node_modules
+
+# Packages lock
+*-lock.json
+
+# Environment variables
+.env
+.env.local

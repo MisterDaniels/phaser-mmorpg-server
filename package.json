@@ -1,0 +1,30 @@
+{
+    "name": "phaser-mmorpg-server",
+    "version": "1.0.0",
+    "description": "Phaser MMORPG server",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "start:dev": "nodemon src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MisterDaniels/phaser-mmorpg-server"
+    },
+    "keywords": [
+        "server",
+        "database",
+        "express"
+    ],
+    "author": "Daniel Silva",
+    "license": "MIT",
+    "dependencies": {
+        "celebrate": "^15.0.0",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "http-status-codes": "^2.1.4"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.14"
+    }
+}

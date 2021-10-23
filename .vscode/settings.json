@@ -1,0 +1,21 @@
+{
+    // Visual settings
+    "editor.tabSize": 4,
+
+    // Utils
+    "editor.rulers": [
+        {
+            "column": 80,
+            "color": "#f1fa8c33"
+        },
+        {
+            "column": 90,
+            "color": "#ff555533"
+        }
+    ],
+
+    // Language environments
+    "[javascript]": {
+        "files.encoding": "utf8"
+    }
+}
