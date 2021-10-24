@@ -1,5 +1,5 @@
 const express = require('express');
-const BodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const { StatusCodes } = require('http-status-codes');
 const { errors } = require('celebrate');
 
@@ -10,7 +10,10 @@ const routes = require('./routes');
 const app = express();
 const port = process.env.SERVER_PORT || 9000;
 
-app.use(BodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
 
 app.use(routes);
 
