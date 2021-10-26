@@ -5,7 +5,7 @@ module.exports = {
     signup(req, res) {
         res.status(StatusCodes.OK).json({
             statusCode: StatusCodes.OK,
-            message: 'Ok'
+            message: 'Signup successful'
         });
     },
 
