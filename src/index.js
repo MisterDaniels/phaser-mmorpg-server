@@ -14,7 +14,7 @@ const routes = require('./routes');
 const app = express();
 const port = process.env.SERVER_PORT || 9000;
 
-const uri = `${ process.env.MONGO_URI }/${ process.env.DATABASE_NAME }`;
+const uri = `${ process.env.MONGO_URI }`;
 mongoose.connect(uri, {
     useNewUrlParser: true
 });

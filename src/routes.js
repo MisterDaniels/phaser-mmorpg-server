@@ -24,8 +24,8 @@ routes.post('/login', celebrate({
         email: Joi.string().email().required(),
         password: Joi.string().required()
     })
-}), (req, res, next) => {
-    passport.authenticate('login', (err, user) => {
+}), async (req, res, next) => {
+    passport.authenticate('login', async (err, user) => {
         if (err) {
             return res.status(StatusCodes.UNAUTHORIZED).json({
                 statusCode: StatusCodes.UNAUTHORIZED,
