@@ -6,8 +6,12 @@ const { StatusCodes } = require('http-status-codes');
 const { errors } = require('celebrate');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const path = require('path');
 
 require('dotenv').config();
+
+global.__basedir = path.join(__dirname, '../');
+global.__sourceDir = path.join(__dirname);
 
 const routes = require('./routes');
 
