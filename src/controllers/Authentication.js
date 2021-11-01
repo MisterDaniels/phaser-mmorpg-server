@@ -12,13 +12,13 @@ const smtpTransport = nodemailer.createTransport({
 });
 
 const handlebarsOptions = {
-    viewEngin: {
+    viewEngine: {
         extName: '.hbs',
         defaultLayout: null,
-        partialsDir: path.join(__sourceDir, '/templates/'),
-        layoutsDir: path.join(__sourceDir, '/templates/')
+        partialsDir: path.join(__sourceDir, 'templates'),
+        layoutsDir: path.join(__sourceDir, 'templates')
     },
-    viewPath: path.join(__sourceDir, '/templates/'),
+    viewPath: path.join(__sourceDir, 'templates'),
     extName: '.html'
 };
 
@@ -73,7 +73,7 @@ module.exports = {
             subject: 'Phaser MMORPG password reset',
             context: {
                 name: 'Joe',
-                url: `http://localhost:${ process.env.PORT || 9000 }`
+                url: `http://localhost:${ process.env.SERVER_PORT || 9000 }`
             }
         });
 
@@ -88,7 +88,7 @@ module.exports = {
 
         await smtpTransport.sendMail({
             to: userEmail,
-            from: email,
+            from: process.env.MAILER_EMAIL,
             template: 'reset-password',
             subject: 'Phaser MMORPG password reset confirmation',
             context: {
