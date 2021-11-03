@@ -2,6 +2,9 @@ const { StatusCodes } = require("http-status-codes");
 const hbs = require('nodemailer-express-handlebars');
 const nodemailer = require('nodemailer');
 const path = require('path');
+const crypto = require('crypto');
+
+const { UserModel } = require('../models');
 
 const smtpTransport = nodemailer.createTransport({
     service: process.env.MAILER_PROVIDER,
@@ -65,6 +68,19 @@ module.exports = {
 
     async forgotPassword(req, res) {
         const userEmail = req.body.email;
+        const user = await UserModel.findOne({ email: userEmail });
+
+        if (!user) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                statusCode: StatusCodes.BAD_REQUEST,
+                message: 'User not found'
+            });
+        }
+
+        const buffer = crypto.randomBytes(20);
+        const token = buffer.toString('hex');
+
+        await UserModel.findByIdAndUpdate({ _id: user._id }, { resetToken: token, resetTokenExpiration: Date.now() + 600000  });
 
         await smtpTransport.sendMail({
             to: userEmail,
