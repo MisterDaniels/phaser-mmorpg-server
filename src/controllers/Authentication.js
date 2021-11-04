@@ -89,7 +89,7 @@ module.exports = {
             subject: 'Phaser MMORPG password reset',
             context: {
                 name: 'Joe',
-                url: `http://localhost:${ process.env.SERVER_PORT || 9000 }`
+                url: `http://localhost:${ process.env.SERVER_PORT || 9000 }?token=${ token }`
             }
         });
 
@@ -101,6 +101,23 @@ module.exports = {
     
     async resetPassword(req, res) {
         const userEmail = req.body.email;
+        const user = await UserModel.findOne({ 
+            resetToken: req.query.token, 
+            resetTokenExpiration: { $gt: Date.now() }, 
+            email: userEmail
+        });
+
+        if (!user) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                statusCode: StatusCodes.BAD_REQUEST,
+                message: 'Invalid token'
+            });
+        }
+
+        user.password = req.body.password;
+        user.resetToken = undefined;
+        user.resetTokenExpiration = undefined;
+        await user.save();
 
         await smtpTransport.sendMail({
             to: userEmail,
@@ -108,7 +125,7 @@ module.exports = {
             template: 'reset-password',
             subject: 'Phaser MMORPG password reset confirmation',
             context: {
-                name: 'Joe'
+                name: user.username
             }
         });
         

@@ -18,6 +18,10 @@
     ],
     "author": "Daniel Silva",
     "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/MisterDaniels/phaser-mmorpg-front/issues"
+    },
+    "homepage": "https://github.com/MisterDaniels/phaser-mmorpg-front#readme",
     "dependencies": {
         "bcrypt": "^5.0.1",
         "celebrate": "^15.0.0",
