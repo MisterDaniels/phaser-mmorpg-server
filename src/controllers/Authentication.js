@@ -44,6 +44,7 @@ module.exports = {
     },
 
     logout(req, res, next) {
+        console.log(req);
         if (req.cookies && req.cookies.jwt) {
             res.clearCookie('jwt');
             res.clearCookie('refreshJwt');
@@ -88,8 +89,8 @@ module.exports = {
             template: 'forgot-password',
             subject: 'Phaser MMORPG password reset',
             context: {
-                name: 'Joe',
-                url: `http://localhost:${ process.env.SERVER_PORT || 9000 }?token=${ token }`
+                name: user.username,
+                url: `${ process.env.FRONT_SERVER_ENDPOINT || 'http://localhost:9006' }/reset-password?token=${ token }`
             }
         });
 
@@ -132,6 +133,20 @@ module.exports = {
         res.status(StatusCodes.OK).json({
             statusCode: StatusCodes.OK,
             message: 'Password updated'
+        });
+    },
+
+    checkUserLoggedIn(req, res) {
+        if (!req.user) {
+            return res.status(StatusCodes.UNAUTHORIZED).json({
+                statusCode: StatusCodes.UNAUTHORIZED,
+                message: 'User not logged in'
+            });
+        }
+
+        return res.status(StatusCodes.OK).json({
+            statusCode: StatusCodes.OK,
+            message: 'User logged in'
         });
     }
 

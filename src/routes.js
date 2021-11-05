@@ -125,4 +125,6 @@ routes.put('/reset-password', celebrate({
     })
 }), AuthenticationController.resetPassword);
 
+routes.get('/check-user', passport.authenticate('jwt', { session: false }), AuthenticationController.checkUserLoggedIn);
+
 module.exports = routes;

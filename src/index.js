@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
-    origin: process.env.CORS_ORIGIN
+    origin: process.env.FRONT_SERVER_ENDPOINT
 }));
 
 require('./authentication');
