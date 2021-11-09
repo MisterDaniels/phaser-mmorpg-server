@@ -39,7 +39,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
-    origin: process.env.FRONT_SERVER_ENDPOINT
+    origin: process.env.FRONT_SERVER_ENDPOINT,
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With', 'X-CSRF-Token', 'X-XSRF-Token']
 }));
 
 require('./authentication');

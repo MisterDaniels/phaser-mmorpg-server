@@ -43,8 +43,7 @@ module.exports = {
         });
     },
 
-    logout(req, res, next) {
-        console.log(req);
+    logout(req, res, next) {        
         if (req.cookies && req.cookies.jwt) {
             res.clearCookie('jwt');
             res.clearCookie('refreshJwt');
