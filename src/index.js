@@ -57,6 +57,20 @@ app.use((req, res) => {
 
 app.use(errors());
 
-app.listen(port, () => {
+const io = require('socket.io').listen();
+
+io.on('connection', (socket) => {
+    socket.on('disconnect', () => {
+        console.log('Player disconnected');
+        console.log(socket);
+    });
+
+    console.log('Player connected');
+    console.log(socket);
+});
+
+const server = require('http').Server(app);
+
+server.listen(port, () => {
     console.log(`[ϟ SERVER] is running on port ${ port }`);
 });

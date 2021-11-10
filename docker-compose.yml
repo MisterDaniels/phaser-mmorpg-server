@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: phaser_mmorpg_database
+    ports:
+      - '27017:27017'
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${LOCAL_MONGO_DB_ROOT_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${LOCAL_MONGO_DB_ROOT_PASS}
+      - MONGO_INITDB_DATABASE=${LOCAL_MONGO_DB_ROOT_DB}
